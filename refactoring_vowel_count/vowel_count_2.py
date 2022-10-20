@@ -3,7 +3,7 @@
 # as a script with string METHODS
 user_input = input("Provide a sentance: ")
 
-count_a = user_input.count('a') + user_input('A')
+count_a = user_input.count('a') + user_input.count('A')
 count_e = user_input.lower().count('e')
 count_i = user_input.lower().count('i')
 count_o = user_input.lower().count('o')
