@@ -10,7 +10,7 @@ class Player:
 
 class TurnBasedGame:
     '''Base class for a turn based game'''
-    player = Player
+    player_clas = Player
     def __init__(self, players: list = None):
         self.winner = None
         self.players = []

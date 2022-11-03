@@ -7,7 +7,10 @@ class RpsPlayer(Player):
 
 
 class RpsGame(TurnBasedGame):
-    player = RpsPlayer
+    player_class = RpsPlayer
+
+    def play_round(self):
+        ...
     
     
 
