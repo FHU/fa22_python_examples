@@ -10,7 +10,7 @@ class Player:
 
 class TurnBasedGame:
     '''Base class for a turn based game'''
-    player_clas = Player
+    player_class = Player
     def __init__(self, players: list = None):
         self.winner = None
         self.players = []
@@ -27,7 +27,7 @@ class TurnBasedGame:
         add_player = "y"
         count = 1
         while add_player == "y":
-            self.players.append(self.player(count))
+            self.players.append(self.player_class(count))
             count += 1
             if self.maximum_players >= count > self.minimum_players:
                 add_player = input("Add another player (y/n)? ").lower()
