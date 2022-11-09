@@ -1,4 +1,5 @@
 from turn_based_game import Player, TurnBasedGame
+import random
 
 class RpsPlayer(Player):
     def __init__(self, number):
