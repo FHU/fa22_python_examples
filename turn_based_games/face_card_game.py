@@ -5,6 +5,11 @@ By convention, the end of a list of cards is considered the top of the pile
 from turn_based_game import Player, TurnBasedGame
 import random
 
+class NotACardError(Exception):
+    '''Raised when another object is used where a Card is required'''
+
+class NotAListError(Exception):
+    ...
 
 class Card:
     value_lookup = {14:'A', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8', 9:'9', 10:'10', 11:'J', 12:'Q', 13:'K'}
@@ -20,18 +25,27 @@ class Card:
             return 'balck'
 
     def __lt__(self, other):
+        if not isinstance(other, Card):
+            raise NotACardError
+
         if self.value < other.value:
             return True
         else:
             return False
 
     def __gt__(self, other):
+        if not isinstance(other, Card):
+            raise NotACardError
+
         if self.value > other.value:
             return True
         else:
             return False
 
     def __eq__(self, other):
+        if not isinstance(other, Card):
+            raise NotACardError
+
         if self.value == other.value:
             return True
         else:
@@ -41,7 +55,9 @@ class Card:
     def __str__(self):
         return f"{self.suit}{self.value_lookup[self.value]}"
 
-    
+class BetterCard(Card):
+    ...
+
 class CardDeck:
     card_type = Card
     def __init__(self):
@@ -61,6 +77,9 @@ class CardDeck:
         return self.cards.pop()
 
     def discard(self, card: Card):
+        if not isinstance(card, Card):
+            raise NotACardError
+
         self.discard_pile.append(card)
 
     def shuffle_in_discard(self):
@@ -92,11 +111,21 @@ class CardPlayer(Player):
         while not card:
             for index, card in enumerate(self.card_hand):
                 print(f"{index}: {card}")
-            selection = int(input("Which card do you choose? "))
-            if selection in range(0,len(self.card_hand)):
+            try:
+                selection = int(input("Which card do you choose? "))
                 self.card_in_play = self.card_hand.pop(selection)
+            except (ValueError, IndexError):
+                print("Your selection is invalid :(")
+
 
     def add_cards_to_hand(self, cards: list):
+        if not isinstance(cards, list):
+            raise NotAListError
+        
+        for obj in cards:
+            if not isinstance(obj, Card):
+                raise NotACardError
+
         self.card_hand = cards + self.card_hand
 
     def play_top_card(self):

@@ -56,7 +56,7 @@ class War(CardGame):
         round_winner.add_cards_to_hand(cards_to_capture)
         print(f"This battle goes to {round_winner.name}")
         print(f'cards captured: {" ".join([ str(card) for card in cards_to_capture])}')
-        time.sleep(.2)
+        #time.sleep(.2)
 
         return super().play_round()
 

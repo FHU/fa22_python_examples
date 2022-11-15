@@ -11,11 +11,11 @@ class Player:
 class TurnBasedGame:
     '''Base class for a turn based game'''
     player_class = Player
-    def __init__(self, players: list = None):
+    def __init__(self, players: list = None, min_players = 2, max_payers = 10):
         self.winner = None
         self.players = []
-        self.minimum_players = 2
-        self.maximum_players = 10
+        self.minimum_players = min_players
+        self.maximum_players = max_payers
 
         if players:
             self.players = players
